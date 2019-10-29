@@ -10,8 +10,8 @@ import Blog from './Blog'
 
 
 const INITIAL_VIEWPORT = {
-  latitude: 47.579717,
-  longitude: -122.388076,
+  latitude: 0,
+  longitude: 0,
   zoom: 13
 };
 
