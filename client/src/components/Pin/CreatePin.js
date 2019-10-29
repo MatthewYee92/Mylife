@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +9,14 @@ import ClearIcon from "@material-ui/icons/Clear";
 import SaveIcon from "@material-ui/icons/SaveTwoTone";
 
 const CreatePin = ({ classes }) => {
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [content, setContent] = useState("");
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log({ title, image, content });
+  };
   return (
     <form className={classes.form}>
       <Typography
@@ -20,15 +28,26 @@ const CreatePin = ({ classes }) => {
         <LandscapeIcon className={classes.iconLarge} /> Pin Location
       </Typography>
       <div>
-        <TextField name="title" label="title" placeholder="Insert pin title" />
+        <TextField
+          name="title"
+          label="title"
+          placeholder="Insert pin title"
+          onChange={e => setTitle(e.target.value)}
+        />
         <input
           accept="image/*"
           id="image"
           type="file"
           className={classes.input}
+          onChange={e => setImage(e.target.files[0])}
         />
         <label htmlFor="image">
-          <Button component="span" size="small" className={classes.button}>
+          <Button
+            style={{ color: image && "green" }}
+            component="span"
+            size="small"
+            className={classes.button}
+          >
             <AddAPhotoIcon />
           </Button>
         </label>
@@ -42,25 +61,24 @@ const CreatePin = ({ classes }) => {
           margin="normal"
           fullWidth
           variant="outlined"
+          onChange={e => setContent(e.target.value)}
         />
       </div>
       <div>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-        >
-          <ClearIcon className={classes.leftIcon}/>
+        <Button className={classes.button} variant="contained" color="primary">
+          <ClearIcon className={classes.leftIcon} />
           Discard
         </Button>
         <Button
-          type='submit'
+          type="submit"
           className={classes.button}
-          variant='contained'
-          color='secondary'        
+          variant="contained"
+          color="secondary"
+          disabled={!title.trim() || !content.trim() || !image}
+          onClick={handleSubmit}
         >
-          Submit 
-          <SaveIcon className={classes.rightIcon}/>
+          Submit
+          <SaveIcon className={classes.rightIcon} />
         </Button>
       </div>
     </form>
