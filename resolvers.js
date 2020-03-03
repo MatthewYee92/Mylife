@@ -1,11 +1,11 @@
 const { AuthenticationError } = require('apollo-server')
 
-const user = {
-  _id: '1',
-  name: 'Matthew',
-  email: 'matthew.yeedev@gmail.com',
-  picture: 'https://cloudinary.com/asdf'
-}
+// const user = {
+//   _id: '1',
+//   name: 'Matthew',
+//   email: 'matthew.yeedev@gmail.com',
+//   picture: 'https://cloudinary.com/asdf'
+// }
 
 const authenticated = next => (root, args, ctx, info) => {
   if(!ctx.currentUser) {
